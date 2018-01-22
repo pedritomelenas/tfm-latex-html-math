@@ -1,0 +1,125 @@
+<html>
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+  <title>Thebe prompt support</title>
+  <link rel="stylesheet" type="text/css" href="index.css" />
+
+  <!-- Thebe configuration !-->
+  <script type="text/x-thebe-config">
+    {
+      bootstrap: true,
+      binderOptions: {
+          repo: "sagemath/sage-binder-env",
+      },
+      stripPrompts: {
+        inPrompt: 'sage: ',
+        continuationPrompt: '....: ',
+        selector: '.sage-input',
+      },
+		  kernelOptions: {
+		    name: "sagemath",
+		  }
+  }
+  </script>
+
+  <!-- Load the Thebe library !-->
+  <script type="text/javascript" src="https://unpkg.com/thebelab@^0.1.0" ></script>
+  <!-- or to use a local build: -->
+  <!-- <script type="text/javascript" src="../lib/index.js"></script> !-->
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>  
+
+</head>
+<body>
+  <h1>Ejemplo de estudio de una función</h1>
+
+  <p>Vamos a ilustrar un ejemplo de uso de <a href="https://github.com/minrk/thebelab">thebelab</a>. Las celdas se pueden ejecutar con "mayúscula+enter", o bien pulsando el botón "run". Es conveniente ejecutar primero la celda que define \(f\), y esperar luego a que el núcleo de <tt>sage</tt> se inicialice.</p>
+
+  <p>Para este ejemplo usaremos la función \(f(x)=\frac{x+3}{x}\).</p>
+
+	<p>Empezaremos representándola con la función <tt>plot</tt>.</p>
+
+  <pre class="sage-input" data-language="python">
+    sage: f= (x+3)/x
+
+    sage: plot(f,(-10,10),ymax=10, ymin=-10)
+  </pre>
+
+	<p>La función no está definida en 0. El dominio de definición de la función es \(\mathbb{R}\setminus\{0\}\).</p>
+
+	<p>En cuanto a los puntos de corte con el eje OX, lo podemos calcular con <tt>solve</tt>.</p>
+
+  <pre class="sage-input" data-language="python">
+    sage: solve(f,x)
+  </pre>
+
+<h2>Continuidad</h2>
+
+	<p>La función es contínua en todo su dominio, pues es un cociente de dos polinomios, y en el dominio el denominador no se anula. Podemos estudiar los límites laterales en el 0.</p>
+
+  <pre class="sage-input" data-language="python">
+    sage: f.limit(x=0,dir="-")
+
+		sage: f.limit(x=0,dir="+")
+  </pre>
+
+<h2>Asíntotas</h2>
+
+<p>Por lo visto en el apartado anterior, tenemos que \(f\) tiene una asíntota vertical en 0. Veamos si tiene asíntotas horizontales. </p>
+
+  <pre class="sage-input" data-language="python">
+    sage: f.limit(x=oo,dir="+")
+
+		sage: f.limit(x=-oo,dir="-")
+  </pre>
+
+<p>Por lo que \(f\) tiene una asíntota horizontal en \(y=1\).</p>
+
+  <pre class="sage-input" data-language="python">
+    sage: plot(f,(-10,10),ymax=10, ymin=-10)+\
+		....: plot(1,(-10,10), linestyle="--", color="gray")
+  </pre>
+
+<h2>Crecimiento</h2>
+
+<p>Para estudiar la monotonía de la función calculamos su derivada y dónde se anula.</p>
+
+  <pre class="sage-input" data-language="python">
+    sage: df=diff(f,x)
+		sage: expand(df)
+
+		sage: solve(df,x)
+  </pre>
+
+<p>Al no anularse, basta ver su valor en un punto cualquiera para ver si es estrictamente positiva o negativa.</p>
+
+  <pre class="sage-input" data-language="python">
+    sage: df.subs({x:1})
+  </pre>
+
+<p>De esta forma obtenemos que \(f\) es estrictamente decreciente en todo su dominio. Como la derivada no se anula, no tiene ni máximos ni mínimos relativos. </p>
+
+<h2>Convexidad</h2>
+
+<p>Veamos en qué signo tiene la segunda derivada.</p>
+
+  <pre class="sage-input" data-language="python">
+    sage: expand(diff(df,x))
+  </pre>
+
+<p>Como vemos, para \(x<0\), \(f''(x)<0\), y para \(x>0\), \(f''(x)>0\). Por tanto, \(f\) será cóncava en \((-\infty,0)\) y convexa en \((0,\infty)\).</p>
+
+
+<h2>Paridad</h2>
+
+<p>La función carece de paridad, pues \(f(x)\neq -f(x)\) y \(f(x)\neq f(-x)\).</p>
+
+  <pre class="sage-input" data-language="python">
+    sage: plot(f,(-10,10),ymax=10, ymin=-10)+\
+		....: plot(f.subs({x:-x}),(-10,10), linestyle="--", color="green")+\
+		....: plot(-f,(-10,10), linestyle="--", color="red")
+  </pre>
+
+
+</body>
+</html>
