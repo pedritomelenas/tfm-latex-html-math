@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+    <title>Ejemplo google charts</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      // Definición de gráfica a dibujar.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Element');
+      data.addColumn('number', 'Percentage');
+      data.addRows([
+        ['Hombre', 42],
+	['Mujer', 20]
+      ]);
+	// Opciones de la gráfica
+        var options = {'title':'Reparto por sexos',
+                       'width':400,
+                       'height':300};
+      // Crear y dibujar el gráfico.
+      var chart = new google.visualization.PieChart(document.getElementById('migrafica'));
+      chart.draw(data, options);
+    }
+  </script>
+ <script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Element');
+      data.addColumn('number', 'Frecuencia');
+      data.addRows([
+        ['6', 7],
+	['7', 6],
+        ['8', 4],
+	['9', 2],
+        ['10', 5],
+	['11', 4],
+        ['12', 6],
+	['13', 5],
+        ['14', 5],
+	['15', 5],
+        ['16', 4],
+	['17', 2],
+        ['18', 6],
+	['19', 0],
+        ['20', 1]
+      ]);
+	// Opciones de la gráfica
+        var options = {'title':'Numero visitas al pediatra',
+                       'width':800,
+                       'height':600};
+      // Crear y dibujar el gráfico.
+      var chart = new google.visualization.BarChart(document.getElementById('migrafica2'));
+      chart.draw(data, options);
+    }
+  </script>
+  
+  
+  
+  
+  
+	
+</head>
+
+<body>
+  
+<H1> Ejemplo práctico sobre gráficos estadísticos </H1>  
+  
+  
+<p>  Con el uso de las librerías estudiadas, se pueden representar datos estadísticos de manera que, se puedan apreciar detalles que a simple vista de una tabla de valores no se verían como, por ejemplo, 
+    la manera en la que están repartidos los datos, la forma de la distribución u otras características del conjunto tomado. Como en los capítulos anteriores se realizará tanto con una librería de  <i>JavaScript</i> de forma dinámica, en este caso <a href="https://developers.google.com/chart">Google Charts</a>, o la de LaTeX de una forma estática. Un ejemplo de uso puede ser el siguiente.  </p>
+
+<p><b>Actividad:</b> Se quieren analizar los beneficios de la lactancia materna. Para ello, la trabajadora social de un centro de salud realiza un estudio en el mismo a 62 pacientes de 1 año, en el que recopila información sobre las siguientes variables de interés:</p>
+<ul>
+<li type="circle"> Sexo del niño.</li>
+<li type="circle"> Número de meses de lactancia materna en ese año de vida.</li>
+<li type="circle"> Número de veces que durante ese año de vida del niño han acudido a la consulta de pediatría.</li>
+</ul>
+<ol type=a>
+<li> Obtener una tabla de frecuencias para la variable Sexo, junto con un diagrama de sectores, indicando los porcentajes.</li>
+<li> Obtener la tabla de frecuencias para el número de visitas al pediatra y argumentar si la variable la consideramos como una variable discreta o continua. Obtener un diagrama de barras o un histograma, según corresponda. Interpretar el gráfico.</li>
+</ol>
+
+<p>En el apartado a., la tabla de frecuencias de la variable Sexo sería:</p>
+<CENTER>
+<table border>
+  <tr>
+    <th scope="col">Hombre</th>
+    <th scope="col">Mujer</th>
+  </tr>
+  <tr>
+    <td>42</td>
+    <td>20</td>
+  </tr>
+</table>
+</CENTER>
+<p>Por lo tanto los diagramas de sectores serían:</p>
+<CENTER>
+<div id="migrafica"/>
+</CENTER>
+<p>En el apartado b., al ser una variable discreta se realizaría un diagrama de barras utilizando la siguiente tabla de frecuencias:</p>
+<CENTER>
+<table border>
+  <tr>
+    <th scope="col">Nº de visitas</th>
+    <th scope="col">6</th>
+	<th scope="col">7</th>
+    <th scope="col">8</th>
+	<th scope="col">9</th>
+    <th scope="col">10</th>
+	<th scope="col">11</th>
+    <th scope="col">12</th>
+	<th scope="col">13</th>
+    <th scope="col">14</th>
+	<th scope="col">15</th>
+    <th scope="col">16</th>
+	<th scope="col">17</th>
+    <th scope="col">18</th>
+	<th scope="col">19</th>
+    <th scope="col">20</th>
+  </tr>
+  <tr>
+    <td>Frecuencia</td>
+    <td>7</td>
+	<td>6</td>
+    <td>4</td>
+	<td>2</td>
+    <td>5</td>
+	<td>4</td>
+    <td>6</td>
+	<td>5</td>
+    <td>5</td>
+	<td>5</td>
+    <td>4</td>
+	<td>2</td>
+    <td>6</td>
+	<td>0</td>
+    <td>1</td>
+  </tr>
+</table>
+</CENTER>
+<p>el diagrama de barras quedaría</p>
+<CENTER>
+<div id="migrafica2"/>
+</CENTER>
+<p>En la gráfica se puede observar que de los datos, el que más frecuencia tiene es el de visitar siete veces al pediatra, mientras el que menos es visitarlo en diecinueve ocasiones que como se puede ver, no hay ningún suceso.</p>
+</body>
