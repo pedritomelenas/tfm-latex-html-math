@@ -1,0 +1,306 @@
+<!doctype html>
+<html>
+<head>
+  <title>Algoritmo Kruskal</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <script src="./viz.js"></script>
+
+</head>
+<body>
+<H1> Algoritmo de Kruskal </H1>
+<p>
+  Se utiliza el algoritmo de Kruskal para encontrar un árbol recubridor mínimo en un grafo conexo y ponderado, es decir, se pretende buscar un subconjunto de aristas que incluyan todos los vértices formando un árbol, y se minimice el valor de la suma de todas las aristas del árbol. El algoritmo consiste en los siguientes pasos:
+</p>
+<ul>
+<li type="circle"> Se marca la arista con menor valor. Si hay más de una, se elige una cualesquiera.</li>
+<li type="circle"> De las aristas restantes, se marca la que tenga menor valor, si hay varias con el mismo valor, se elige una cualesquiera.</li>
+<li type="circle"> Repetir el segundo paso siempre que la arista que se elija no forme un ciclo con las que ya están marcadas.</li>
+<li type="circle"> El algoritmo finaliza cuando todos los vértices están conectados por las aristas marcadas.</li>
+</ul>
+
+<p>Por ejemplo sea el siguiente grafo ponderado se va a buscar el árbol recubridor mínimo mediante el algoritmo:</p>
+
+<CENTER>
+<div id="ejemplo"></div>
+</CENTER>
+<script>
+    document.getElementById('ejemplo').innerHTML += Viz('graph G {\
+        node [color=lightblue2, style=filled];\
+		A -- B[ label = "3" ];\
+		A -- C[ label = "1" ];\
+		B -- C[ label = "8" ];\
+    	B -- D[ label = "7" ];\
+    	B -- E[ label = "5"];\
+		D -- E[ label = "6"];\
+    	D -- G[ label = "9" ];\
+		E -- F[ label = "1"];\
+		E -- G[ label = "2"];\
+    	F -- G[ label = "4" ];\
+    	A;\
+		B;\
+		C;\
+		D;\
+		E;\
+		F;\
+		G;\
+        }\
+    ',{ engine: "neato" });
+</script>
+
+<p>Por lo tanto, se siguen los pasos:</p>
+<ul>
+<li type="circle"> Se elige por ejemplo la arista EF cuyo valor es 1 mínimo. Se marca.</li>
+</ul>
+<!-- graph G {
+    node [color=lightblue2, style=filled];
+		A -- B[ label = "3" ];
+		A -- C[ label = "1" ];
+		B -- C[ label = "8" ];
+    	B -- D[ label = "7" ];
+    	B -- E[ label = "5"];
+		D -- E[ label = "6"];
+    	D -- G[ label = "9" ];
+		E -- F[ label = "1",color=crimson, penwidth=3.0];
+		E -- G[ label = "2"];
+    	F -- G[ label = "4" ];
+    	A;
+		B;
+		C;
+		D;
+		E[color=crimson];
+		F[color=crimson];
+		G;
+}
+-->
+<CENTER>
+<div id="paso1"></div>
+</CENTER>
+<script>
+    document.getElementById('paso1').innerHTML += Viz('graph G {\
+        node [color=lightblue2, style=filled];\
+		A -- B[ label = "3" ];\
+		A -- C[ label = "1" ];\
+		B -- C[ label = "8" ];\
+    	B -- D[ label = "7" ];\
+    	B -- E[ label = "5"];\
+		D -- E[ label = "6"];\
+    	D -- G[ label = "9" ];\
+		E -- F[ label = "1",color=crimson, penwidth=3.0]\
+		E -- G[ label = "2"];\
+    	F -- G[ label = "4" ];\
+    	A;\
+		B;\
+		C;\
+		D;\
+		E[color=crimson];\
+		F[color=crimson];\
+		G;\
+        }\
+    ',{ engine: "neato" });
+</script>
+<ul>
+<li type="circle"> Se escoge la siguiente arista con menor valor que es AC=1, se marca.</li>
+</ul>
+
+<CENTER>
+<div id="paso2"></div>
+</CENTER>
+<script>
+    document.getElementById('paso2').innerHTML += Viz('graph G {\
+        node [color=lightblue2, style=filled];\
+		A -- B[ label = "3" ];\
+		A -- C[ label = "1",color=crimson, penwidth=3.0 ];\
+		B -- C[ label = "8" ];\
+    	B -- D[ label = "7" ];\
+    	B -- E[ label = "5"];\
+		D -- E[ label = "6"];\
+    	D -- G[ label = "9" ];\
+		E -- F[ label = "1",color=darkviolet, penwidth=3.0];\
+		E -- G[ label = "2"];\
+    	F -- G[ label = "4" ];\
+    	A[color=crimson];\
+		B;\
+		C[color=crimson];\
+		D;\
+		E[color=darkviolet];\
+		F[color=darkviolet];\
+		G;\
+        }\
+    ',{ engine: "neato" });
+</script>
+<ul>
+<li type="circle"> Se escoge la siguiente arista con menor valor que es EG=2, se marca ya que no forma ningún ciclo con las aristas marcadas.</li>
+</ul>
+
+<CENTER>
+<div id="paso3"></div>
+</CENTER>
+<script>
+    document.getElementById('paso3').innerHTML += Viz('graph G {\
+        node [color=lightblue2, style=filled];\
+		A -- B[ label = "3" ];\
+		A -- C[ label = "1",color=darkviolet, penwidth=3.0];\
+		B -- C[ label = "8" ];\
+    	B -- D[ label = "7" ];\
+    	B -- E[ label = "5"];\
+		D -- E[ label = "6"];\
+    	D -- G[ label = "9" ];\
+		E -- F[ label = "1",color=darkviolet, penwidth=3.0];\
+		E -- G[ label = "2",color=crimson , penwidth=3.0];\
+    	F -- G[ label = "4" ];\
+    	A[color=darkviolet];\
+		B;\
+		C[color=darkviolet];\
+		D;\
+		E[color=darkviolet];\
+		F[color=darkviolet];\
+		G[color=crimson];\
+        }\
+    ',{ engine: "neato" });
+</script>
+<ul>
+<li type="circle"> Se escoge la siguiente arista con menor valor que es AB=3, se marca ya que no forma ningún ciclo con las aristas marcadas.</li>
+</ul>
+
+<CENTER>
+<div id="paso4"></div>
+</CENTER>
+<script>
+    document.getElementById('paso4').innerHTML += Viz('graph G {\
+        node [color=lightblue2, style=filled];\
+		A -- B[ label = "3",color=crimson , penwidth=3.0];\
+		A -- C[ label = "1",color=darkviolet, penwidth=3.0];\
+		B -- C[ label = "8" ];\
+    	B -- D[ label = "7" ];\
+    	B -- E[ label = "5"];\
+		D -- E[ label = "6"];\
+    	D -- G[ label = "9" ];\
+		E -- F[ label = "1",color=darkviolet, penwidth=3.0];\
+		E -- G[ label = "2",color=darkviolet, penwidth=3.0];\
+    	F -- G[ label = "4" ];\
+    	A[color=darkviolet];\
+		B[color=crimson];\
+		C[color=darkviolet];\
+		D;\
+		E[color=darkviolet];\
+		F[color=darkviolet];\
+		G[color=darkviolet];\
+        }\
+    ',{ engine: "neato" });
+</script>
+<ul>
+<li type="circle"> Se escoge la siguiente arista con menor valor que es GF=4, se desecha ya que forma un ciclo con las aristas EG y EF marcadas anteriormente.</li>
+<li type="circle"> Se escoge la siguiente arista con menor valor que es BE=5, se marca ya que no forma ningún ciclo con las aristas marcadas.</li>
+</ul>
+
+<CENTER>
+<div id="paso5"></div>
+</CENTER>
+<script>
+    document.getElementById('paso5').innerHTML += Viz('graph G {\
+        node [color=lightblue2, style=filled];\
+		A -- B[ label = "3",color=darkviolet, penwidth=3.0];\
+		A -- C[ label = "1",color=darkviolet, penwidth=3.0];\
+		B -- C[ label = "8" ];\
+    	B -- D[ label = "7" ];\
+    	B -- E[ label = "5",color=crimson , penwidth=3.0];\
+		D -- E[ label = "6"];\
+    	D -- G[ label = "9" ];\
+		E -- F[ label = "1",color=darkviolet, penwidth=3.0];\
+		E -- G[ label = "2",color=darkviolet, penwidth=3.0];\
+    	F -- G[ label = "4" ];\
+    	A[color=darkviolet];\
+		B[color=darkviolet];\
+		C[color=darkviolet];\
+		D;\
+		E[color=darkviolet];\
+		F[color=darkviolet];\
+		G[color=darkviolet];\
+        }\
+    ',{ engine: "neato" });
+</script>
+<ul>
+<li type="circle"> Se escoge la siguiente arista con menor valor que es DE=6, se marca ya que no forma ningún ciclo con las aristas marcadas.</li>
+</ul>
+
+<CENTER>
+<div id="paso6"></div>
+</CENTER>
+<script>
+    document.getElementById('paso6').innerHTML += Viz('graph G {\
+        node [color=lightblue2, style=filled];\
+		A -- B[ label = "3",color=darkviolet, penwidth=3.0];\
+		A -- C[ label = "1",color=darkviolet, penwidth=3.0];\
+		B -- C[ label = "8" ];\
+    	B -- D[ label = "7" ];\
+    	B -- E[ label = "5",color=darkviolet, penwidth=3.0];\
+		D -- E[ label = "6",color=crimson, penwidth=3.0 ];\
+    	D -- G[ label = "9" ];\
+		E -- F[ label = "1",color=darkviolet, penwidth=3.0];\
+		E -- G[ label = "2",color=darkviolet, penwidth=3.0];\
+    	F -- G[ label = "4" ];\
+    	A[color=darkviolet];\
+		B[color=darkviolet];\
+		C[color=darkviolet];\
+		D[color=crimson];\
+		E[color=darkviolet];\
+		F[color=darkviolet];\
+		G[color=darkviolet];\
+        }\
+    ',{ engine: "neato" });
+</script>
+<ul>
+<li type="circle"> Se da por finalizado el algoritmo puesto que ya se tienen los 7 vértices del grafo seleccionados.</li>
+</ul>
+
+<!-- graph G {
+    node [color=lightblue2, style=filled];
+		A -- B[ label = "3",color=darkviolet, penwidth=3.0];
+		A -- C[ label = "1",color=darkviolet, penwidth=3.0];
+		B -- C[ label = "8" ];
+    	B -- D[ label = "7" ];
+    	B -- E[ label = "5",color=darkviolet, penwidth=3.0];
+		D -- E[ label = "6",color=darkviolet, penwidth=3.0];
+    	D -- G[ label = "9" ];
+		E -- F[ label = "1",color=darkviolet];
+		E -- G[ label = "2",color=darkviolet, penwidth=3.0];
+    	F -- G[ label = "4" ];
+    	A[color=darkviolet];
+		B[color=darkviolet];
+		C[color=darkviolet];
+		D[color=darkviolet];
+		E[color=darkviolet];
+		F[color=darkviolet];
+		G[color=darkviolet];
+}
+-->
+<CENTER>
+<div id="final"></div>
+</CENTER>
+<script>
+    document.getElementById('final').innerHTML += Viz('graph G {\
+        node [color=lightblue2, style=filled];\
+		A -- B[ label = "3",color=darkviolet, penwidth=3.0];\
+		A -- C[ label = "1",color=darkviolet, penwidth=3.0];\
+		B -- C[ label = "8" ];\
+    	B -- D[ label = "7" ];\
+    	B -- E[ label = "5",color=darkviolet, penwidth=3.0];\
+		D -- E[ label = "6",color=darkviolet, penwidth=3.0];\
+    	D -- G[ label = "9" ];\
+		E -- F[ label = "1",color=darkviolet, penwidth=3.0];\
+		E -- G[ label = "2",color=darkviolet, penwidth=3.0];\
+    	F -- G[ label = "4" ];\
+    	A[color=darkviolet];\
+		B[color=darkviolet];\
+		C[color=darkviolet];\
+		D[color=darkviolet];\
+		E[color=darkviolet];\
+		F[color=darkviolet];\
+		G[color=darkviolet];\
+        }', { engine: "neato" }
+    );
+</script>
+
+</body>
+</html>
