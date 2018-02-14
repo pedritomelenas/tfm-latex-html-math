@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejemplo de function-plot</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.20.2/math.min.js"></script>
+
+  <script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>
+
+  <!-- load http://maurizzzio.github.io/function-plot/ -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="./function-plot.js"></script>
+
+</head>
+<body>
+
+<H1> Ejemplo práctico sobre estudio de funciones con function-plot</H1>
+
+<p>La librería <a href="https://mauriciopoppe.github.io/function-plot/">function-plot</a> también permite dibujar funciones de forma sencilla. Por lo que se puede hacer un estudio de continuidad, derivabilidad, extremos relativos, convexidad, simetría,\(\dots\) de cualquier función. Un ejemplo práctico puede ser el estudio de la función:</p>
+
+$$f(x)=\left\{ \begin{array}{lcc}
+                -x^2-2x+3  &   si  & x \leq 1 \\
+             \\ \frac{x}{x-1} &  si & 1 < x  \\
+             \end{array}
+   \right.$$ 
+<p>Para ver su dominio, se puede ver en el siguiente gráfico:</p>
+<DIV ALIGN=center>
+<div id="dominio"></div>
+</DIV>
+
+<p>En la gráfica también se puede ver los puntos de corte con los ejes, el punto de corte con el eje de abscisas es el \((-3,0)\) y el punto de corte también con el eje de ordenadas es el \((0,3)\).</p>
+
+<p>En esta función se puede observar que es continua en \((-\infty,1)\) por ser una función cuadrática y en \((1,+\infty)\) por ser un cociente de polinomios tal que el denominador no se anula en el intervalo en el que está definido.  Para ver si es continua en \(x=1\) se puede observar mediante la gráfica como la imagen de la función da un salto; o bien haciendo los límites laterales,</p>
+ 
+<p>\(\displaystyle\lim_{x \rightarrow 1^-} f(x)=\displaystyle\lim_{x \rightarrow 1^-}-x^2-2x+3=0\)</p>
+
+<p>\(\displaystyle\lim_{x \rightarrow 1^+} f(x)=\displaystyle\lim_{x \rightarrow 1^+}\frac{x}{x-1}=+\infty\)</p>
+
+<H2>Asíntotas</H2>
+
+<p>También se puede ver si existen o no existen algún tipo de asíntotas, por ejemplo en la gráfica de la función \(f\) se puede observar que existe una asíntota horizontal a la izquierda en \(y=1\) y otra vertical hacia arriba a la izquierda de \(x=1\).</p>
+
+<DIV ALIGN=center>
+<div id="asintota"></div>
+</DIV>
+
+<p>La función \(f\)  tiene la asíntota vertical hacia arriba a la derecha de \(x=1\) que es el único valor que anula al denominador, ya que</p>
+$$ \displaystyle\lim_{x \rightarrow 1^-} f(x)=\displaystyle\lim_{x \rightarrow 1^-}-x^2-2x+3=0 \; ; \; \displaystyle\lim_{x \rightarrow 1^+} f(x)=\displaystyle\lim_{x \rightarrow 1^+}\frac{x}{x-1}=+\infty $$
+<p>y tiene a la recta \(y=1\) como asíntota horizontal a la izquierda ya que </p>
+$$ \displaystyle\lim_{x \rightarrow -\infty} f(x)=\displaystyle\lim_{x \rightarrow -\infty}-x^2-2x+3=-\infty \;\;\;\;\; \;\;\;\; \;\;\;\;\; \displaystyle\lim_{x \rightarrow +\infty} f(x)=\displaystyle\lim_{x \rightarrow +\infty}\frac{x}{x-1}=1 $$
+
+<H2>Monotonía</H2>
+
+<p>Para estudiar la monotonía de una función se tiene que observar el signo de la derivada. Por ejemplo la función \(f\) cuya derivada es 
+$$f'(x)=\left\{ \begin{array}{lcc}
+                -2x-2  &   si  & x \leq 1 \\
+             \\ \frac{-1}{(x-1)^2} &  si & 1 < x  \\
+             \end{array}
+   \right.$$
+
+primero se observa cuando se anula la derivada, esto es, \( f'(x)=-2x-2=0\) por lo tanto, se anula en \(x=-1\). Por lo tanto, la función es monótona en \((-\infty,-1]\), en \([-1,1]\) y en \((1,+\infty)\). Evaluando la derivada en un punto de cada intervalo, se tiene:</p>
+
+<ul>
+<li type="circle"> \(f'(-3)=4>0\) , se tiene que \(f\) es creciente \((-\infty,-1]\);</li>
+<li type="circle"> \(f'(0)=-2<0\) , por tanto \(f\) es decreciente \([-1,1]\); y,</li>
+<li type="circle"> \(f'(2)=-1<0\) , en consecuencia \(f\) es decreciente \(1,+\infty)\).</li>
+</ul>
+
+<p>Esto también se puede observar en la gráfica</p>
+
+<DIV ALIGN=center>
+<div id="derivada"></div>
+</DIV>
+
+<p>donde de azul se tiene la función \(f\), la linea fina de color azul claro es la derivada para \(x \leq 1\)  y la línea roja es la derivada para  \(x > 1\) (que se actualizan al mover el ratón sobre la gráfica); por lo que se puede observar directamente la monotonía observando \(f\) u observando cuando la pendiente de la derivada.</p>
+
+<p>Para calcular los máximos y mínimos relativos de la función \(f\) se observan los puntos críticos dónde se anula la primera derivada y evaluar la segunda derivada en dichos puntos, esto es, siendo la segunda derivada de la función anterior $$f''(x)=\left\{ \begin{array}{lcc}
+                -2  &   si  & x \leq 0 \\
+             \\ \frac{2}{(x-1)^3} &  si & 0 < x  \\
+             \end{array}
+   \right.$$ 
+evaluando en el punto \(x=-1\), \(f''(-1)=-2<0\), por tanto en \(x=-1\), \(f\) alcanza un máximo relativo.</p>
+
+<p>También se puede ver en la gráfica directamente o bien observando qué signo tiene la segunda derivada dibujada en rojo.</p>
+
+<DIV ALIGN=center>
+<div id="segundaderivada"></div>
+</DIV>
+
+<p>De esta manera también se puede observar si la función es cóncava o convexa, según el signo de \(f''\).</p>
+
+<ul>
+<li type="circle"> \(f\) es concava en  \((-\infty,-1]\) puesto que \(f''<0\) en ese intervalo,</li>
+<li type="circle"> \(f\) es convexa en \((1,+\infty)\) puesto que \(f''>0\) en dicho intervalo.</li>
+</ul>   
+   
+<h2>Paridad</h2>
+
+<p>También se puede comprobar la paridad de cualquier función, por ejemplo para la función \(f\), si fuera par se tendría que dar que \(f(-x) = f(x)\) o si fuese impar que \(f(-x) = -f(x)\). Se puede examinar en la siguiente gráfica</p>   
+   
+<DIV ALIGN=center>
+<div id="paridad"></div>
+</DIV>  
+   
+<p>donde de color verde se representa \(f(x)\), de color azul se representa \(f(-x)\) y por último de rojo \(-f(x)\). Como no se solapan ninguna color no se da ningun caso, por lo tanto la función \(f\) no tiene ninguna paridad.</p>   
+   
+
+
+<script>
+//functionPlot.globals.COLORS = d3.scale.category10().range();
+
+c= functionPlot({
+  target: '#dominio',
+  width: 600,
+  height: 600,  
+  xAxis: {
+    domain: [-7, 10], 
+    label: 'eje x'
+    },
+  yAxis: {
+    domain: [-7, 10], 
+    label: 'eje y'
+    },
+  // disableZoom: true,
+  grid: false,
+  data: [
+	{ fn: '-x^2-2x+3',range: [-50 ,1], color: 'blue' },
+    { fn: '(x)/(x-1)',range: [1 ,50], color: 'blue'}
+  ],
+
+});;
+
+d= functionPlot({
+  target: '#asintota',
+  width: 600,
+  height: 600,  
+  xAxis: {
+    domain: [-7, 10], 
+    label: 'eje x'
+    },
+  yAxis: {
+    domain: [-7, 10], 
+    label: 'eje y'
+    },
+  // disableZoom: true,
+  grid: false,
+  data: [
+	{ fn: '-x^2-2x+3',range: [-50 ,1], color: 'blue' },
+    { fn: '(x)/(x-1)',range: [1 ,50], color: 'blue'}
+  ],
+	  annotations: [ {
+    x: 1,
+    text: 'x = 1'
+  }, {
+    y: 1,
+    text: 'y = 1'
+  }]
+});;
+
+e= functionPlot({
+  target: '#derivada',
+   width: 600,
+  height: 600,  
+  xAxis: {
+    domain: [-7, 10], 
+    label: 'eje x'
+    },
+  yAxis: {
+    domain: [-7, 10], 
+    label: 'eje y'
+    },
+  // disableZoom: true,
+  grid: false,
+  data: [{
+          fn: 'x<=1?-x^2-2x+3:(x)/(x-1)', color: 'blue', 
+          derivative: {
+              fn: 'x<=1?-2x-2:(-1)/(x-1)^2', 
+              x0: 2,
+              updateOnMouseMove: true
+          },
+          sampler: 'builtIn',  // this will make function-plot use the evaluator of math.js
+          graphType: 'polyline'
+        }]
+  });;
+
+
+f= functionPlot({
+  target: '#segundaderivada',
+  width: 600,
+  height: 600,  
+  xAxis: {
+    domain: [-7, 10], 
+    label: 'eje x'
+    },
+  yAxis: {
+    domain: [-7, 10], 
+    label: 'eje y'
+    },
+  // disableZoom: true,
+  grid: false,
+  data: [
+	{ fn: '-x^2-2x+3',range: [-50 ,1], color: 'blue' },
+	{ fn: '-2x-2',range: [-50 ,1], color: 'black', nSamples: 100,graphType: 'scatter' },
+	{ fn: '-2',range: [-50 ,1], color: 'red', nSamples: 100,graphType: 'scatter' },
+	{ fn: '(x)/(x-1)',range: [1 ,50], color: 'blue'},
+	{ fn: '(-1)/(x-1)^2',range: [1 ,50], color: 'black', nSamples: 100,graphType: 'scatter'},
+    { fn: '(2)/(x-1)^3',range: [1 ,50], color: 'red', nSamples: 100,graphType: 'scatter'}
+  ],
+
+});;
+
+g= functionPlot({
+  target: '#paridad',
+  width: 600,
+  height: 600,  
+  xAxis: {
+    domain: [-7, 10], 
+    label: 'eje x'
+    },
+  yAxis: {
+    domain: [-7, 10], 
+    label: 'eje y'
+    },
+  // disableZoom: true,
+  grid: false,
+  data: [
+	{ fn: '-x^2-2x+3',range: [-50 ,1], color: 'green' },
+	{ fn: '-x^2+2x+3',range: [-50 ,1], color: 'blue'},
+	{ fn: 'x^2+2x-3',range: [-50 ,1], color: 'red'},
+	{ fn: '(x)/(x-1)',range: [1 ,50], color: 'green'},
+	{ fn: '(-x)/(-x-1)',range: [1 ,50], color: 'blue'},
+    { fn: '(-1)*(x)/(x-1)',range: [1 ,50], color: 'red'}
+  ],
+
+});;
+
+
+
+</script>
+
+
+
+</body>
+</html>
