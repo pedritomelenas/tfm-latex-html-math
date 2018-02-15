@@ -9,3 +9,4 @@ This repository is available through github-pages [here](https://pedritomelenas.
 1. An [example](thebelab/sage.html) of [SageMath](http://www.sagemath.org) kernel using [binder](https://mybinder.org) and thebelab.
 1. A graph [example](vis/Kruskal.html) of Kruskal's algorithm with vis.js, and [also](viz/Ejemplo-viz.html) with viz.js. 
 1. A Google charts [example](Google-charts/Estadistica.html).
+1. An [example](d3/graficoD3.html) of an histogram and a dispersion plot with d3.js.
